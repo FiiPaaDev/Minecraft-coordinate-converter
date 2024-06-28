@@ -81,16 +81,29 @@ def paste_button():
             message="The clipboard you pasting does not contain '/tp' !",
             timeout=5
         )
+
+def delete_button():
+    overworld_x_entry.delete(0, tkinter.END)
+    overworld_y_entry.delete(0, tkinter.END)
+    nether_x_entry.delete(0, tkinter.END)
+    nether_y_entry.delete(0, tkinter.END)
+
 button2 = tkinter.Button(frame, text="Paste", command=paste_button)
 button2.grid(row=1, column=0, sticky="we", padx=10, pady=2)
+button2.config(bg="light green")
 
 button = tkinter.Button(frame, text="Convert", command=button_event)
 button.grid(row=2, column=0, sticky="we", padx=10, pady=2)
+button.config(bg="light blue")
+
+button3 = tkinter.Button(frame, text="Delete", command=delete_button)
+button3.grid(row=3, column=0, sticky="we", padx=10, pady=2)
+button3.config(bg="orange")
 
 #/////////////////////////////////////////////////////////////////////////
 
 nether_frame = tkinter.LabelFrame(frame, text="Netherworld Coordinate")
-nether_frame.grid(row=3, column=0, padx=10, pady=10)
+nether_frame.grid(row=4, column=0, padx=10, pady=10)
 
 nether_x_label = tkinter.Label(nether_frame, text="X coordinate")
 nether_x_label.grid(row=0, column=0)
