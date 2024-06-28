@@ -60,14 +60,10 @@ def paste_button():
         coordinate = paste_content
         numbers_str = coordinate.split()[1:]
 
-        numbers = [int(num) for num in numbers_str]
+        numbers = [num for num in numbers_str]
 
-        x_data = numbers[0]
-
-        if len(numbers) > 2:
-            z_data = numbers[2]
-        else:
-            z_data = numbers[1]
+        x_data = int(numbers[0])
+        z_data = int(numbers[2])
 
         overworld_x_entry.delete(0, tkinter.END)
         overworld_y_entry.delete(0, tkinter.END)
