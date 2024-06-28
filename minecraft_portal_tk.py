@@ -2,6 +2,7 @@ import tkinter
 from tkinter import ttk
 from tkinter import *
 import pyperclip
+import plyer
 
 #generate window
 window = tkinter.Tk()
@@ -54,28 +55,37 @@ def button_event():
     
 def paste_button():
     paste_content = pyperclip.paste()
-    coordinate = paste_content
-    numbers_str = coordinate.split()[1:]
 
-    numbers = [int(num) for num in numbers_str]
+    if "/tp" in paste_content:
+        coordinate = paste_content
+        numbers_str = coordinate.split()[1:]
 
-    x_data = numbers[0]
+        numbers = [int(num) for num in numbers_str]
 
-    if len(numbers) > 2:
-     z_data = numbers[2]
+        x_data = numbers[0]
+
+        if len(numbers) > 2:
+            z_data = numbers[2]
+        else:
+            z_data = numbers[1]
+
+        overworld_x_entry.delete(0, tkinter.END)
+        overworld_y_entry.delete(0, tkinter.END)
+        overworld_x_entry.insert(0, x_data)
+        overworld_y_entry.insert(0, z_data)
     else:
-     z_data = numbers[1]
-
-    overworld_x_entry.delete(0, tkinter.END)
-    overworld_y_entry.delete(0, tkinter.END)
-    overworld_x_entry.insert(0, x_data)
-    overworld_y_entry.insert(0, z_data)
+        overworld_x_entry.delete(0, tkinter.END)
+        overworld_y_entry.delete(0, tkinter.END)
+        plyer.notification.notify(
+            title="Notification Title",
+            message="The clipboard you pasting does not contain '/tp' !",
+            timeout=5
+        )
+button2 = tkinter.Button(frame, text="Paste", command=paste_button)
+button2.grid(row=1, column=0, sticky="we", padx=10, pady=2)
 
 button = tkinter.Button(frame, text="Convert", command=button_event)
-button.grid(row=1, column=0, sticky="we", padx=10, pady=5)
-
-button2 = tkinter.Button(frame, text="paste", command=paste_button)
-button2.grid(row=2, column=0, sticky="we", padx=10, pady=5)
+button.grid(row=2, column=0, sticky="we", padx=10, pady=2)
 
 #/////////////////////////////////////////////////////////////////////////
 
